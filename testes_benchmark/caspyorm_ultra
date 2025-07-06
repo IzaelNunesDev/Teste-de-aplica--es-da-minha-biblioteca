@@ -1,0 +1,12 @@
+{
+  "library": "CaspyORM",
+  "insert_ops_per_second": 1053.002776286383,
+  "query_ops_per_second": 5231.405565817076,
+  "insert_time": 94.96651124954224,
+  "query_time": 1.9115321636199951,
+  "total_time": 96.87804341316223,
+  "memory_used": 11.0,
+  "records_inserted": 100000,
+  "queries_executed": 1000,
+  "timestamp": "2025-07-05T21:29:31.375501"
+}

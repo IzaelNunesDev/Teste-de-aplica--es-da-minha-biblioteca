@@ -1,0 +1,15 @@
+# CaspyORM (standalone)
+git+https://github.com/IzaelNunesDev/CaspyORM.git@standalone
+
+# Cassandra dependencies
+cassandra-driver>=3.28.0
+cqlengine>=0.21.0
+
+# Data processing
+pandas>=2.0.0
+pyarrow>=10.0.0
+
+# Utilities
+rich>=13.0.0
+psutil>=5.9.0
+setuptools>=65.0.0 

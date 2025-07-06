@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # Cassandra Database
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra_demo
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=demo_cluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_RACK=rack1
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD", "cqlsh", "-u", "cassandra", "-p", "cassandra", "-e", "SELECT 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # CaspyORM Demo
+  caspyorm_demo:
+    build:
+      context: ./caspyorm_demo
+      dockerfile: Dockerfile
+    container_name: caspyorm_demo
+    ports:
+      - "8000:8000"
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    environment:
+      - CASSANDRA_HOSTS=cassandra
+      - CASSANDRA_PORT=9042
+      - CASSANDRA_KEYSPACE=taxi_demo
+    volumes:
+      - ./caspyorm_demo:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # CQLengine Demo
+  cqlengine_demo:
+    build:
+      context: ./cqlengine_demo
+      dockerfile: Dockerfile
+    container_name: cqlengine_demo
+    ports:
+      - "8001:8001"
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    environment:
+      - CASSANDRA_HOSTS=cassandra
+      - CASSANDRA_PORT=9042
+      - CASSANDRA_KEYSPACE=taxi_demo
+    volumes:
+      - ./cqlengine_demo:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+
+  # Nginx Reverse Proxy (Opcional)
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - caspyorm_demo
+      - cqlengine_demo
+    profiles:
+      - proxy
+
+volumes:
+  cassandra_data: 

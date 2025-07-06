@@ -1,0 +1,10 @@
+fastapi==0.115.14
+uvicorn==0.35.0
+pydantic==2.11.7
+psutil==7.0.0
+pandas==2.3.0
+pyarrow==20.0.0
+caspyorm
+cassandra-driver
+cqlengine
+rich 

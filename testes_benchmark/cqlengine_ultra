@@ -1,0 +1,12 @@
+{
+  "library": "CQLengine",
+  "insert_ops_per_second": 656.8620670155841,
+  "query_ops_per_second": 2550.7003123073923,
+  "insert_time": 152.23896312713623,
+  "query_time": 3.920491933822632,
+  "total_time": 156.15945506095886,
+  "memory_used": 291.64453125,
+  "records_inserted": 100000,
+  "queries_executed": 1000,
+  "timestamp": "2025-07-05T21:35:54.886534"
+}

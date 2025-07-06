@@ -1,0 +1,25 @@
+# CaspyORM Demo - Dependências
+# Demonstração dos pontos fortes da CaspyORM vs CQLengine
+
+# Framework web
+fastapi==0.115.14
+uvicorn[standard]==0.35.0
+
+# ORM e banco de dados
+caspyorm==0.1.0
+cassandra-driver==3.29.2
+
+# Validação e serialização
+pydantic==2.11.7
+
+# Utilitários
+psutil==7.0.0
+python-dateutil==2.9.0
+
+# Logging e monitoramento
+rich==14.0.0
+
+# Desenvolvimento (opcional)
+pytest>=8.2.0
+pytest-asyncio>=0.24.0
+httpx>=0.28.0 
